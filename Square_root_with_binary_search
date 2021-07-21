@@ -1,0 +1,88 @@
+/**
+ * This program computes the square root of a number upto p decimal places using binary search without using any inbuilt functions
+ *
+ * Compilation: gcc -o sqaure_root square_root.c
+ * Execution: ./square_root.c
+ *
+ * @Muskan, 1910990681, 18/07/2021
+ * Assignment 1 (homework)
+ * Recources- geeksforgeeks (to understand how to get precision)
+ */
+
+#include <stdio.h>
+
+/**
+ * Fucntion to calculate square root upto given precision
+ * Parameters
+ * number: int type number whose square root we are to calculate
+ * precision: integer number for decimal precision
+ * return the square root in float data  type
+ */
+
+float sq_root (int number, int precision)
+{
+  int mid;
+  int l = 0; //lower limit
+  int h = number; //upper limit
+  float sqroot; //this will store the answer
+  float increment = 0.1; //to find precision
+  
+  //base cases
+  if (number == 0 || number == 1)
+    {
+      return number;
+    }
+  
+  // loop to find the integer part of the square root using binary search
+  while (l <= h)
+    {
+      mid = (l + h) / 2;
+      if (mid * mid == number)
+	{
+	  sqroot = mid;
+	  break;
+	}
+
+      if (mid * mid < number)
+	{
+	  l = mid + 1;
+	  sqroot = mid;
+	}
+      else
+	{
+	  h = mid - 1;
+	}
+    }
+  
+  // loop to compute the precision
+  // run the loop upto the number of demical precision 
+  
+  for (int i = 0; i < precision; i++) 
+    {
+      while (sqroot * sqroot <= number)
+	{
+	  sqroot += increment;
+	}
+	
+      // if the sqroot*sqroot is greate than number, we will subtract the increment
+      // and move to next decimal position
+      
+      sqroot = sqroot - increment;  
+      increment = increment / 10;
+    }
+
+  return sqroot; 
+
+}
+
+int main ()
+{
+  int number;
+  int precision;
+
+  printf ("Enter the number and precision: \n");
+  scanf ("%d %d", &number, &precision);
+  printf ("%g", sq_root (number, precision)); // %g to remove the trailing zeroes
+
+  return 0;
+}
