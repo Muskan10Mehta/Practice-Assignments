@@ -31,6 +31,15 @@ int main(){
    return 0;
 }
 
+/** Function to find the first index at which any character from s2 occurs in s1
+  * 
+  * Parameters: 
+  * char array s1
+  * char array s2
+  *
+  * returns index of first occurence, if none returns -1
+  */
+
 int any(char s1[], char s2[]){
     
    int i, j;
