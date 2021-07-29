@@ -1,11 +1,11 @@
 /**
  * Program to build a fucntion to reverse an array
  *
- * Compilation: gcc -o reverse_array reverse_array.c
+ * Compilation: gcc -o reverse_array 04_reverse_array.c
  * Execution: ./reverse_array
  *
  * @Muskan, 190990681, 28/07/2021
- * Day 2 Assignment C Foundations
+ * Assignment C Foundations, Question 4
  */
 
 #include <stdio.h>
@@ -37,6 +37,14 @@ int main(){
    return 0;
 }
 
+/**
+  * Function to reverse the string by swapping first and last elements
+  * and swapping until it has reached the center of array
+  * 
+  * Parameters:
+  * array: the integer array
+  * size: the size of the integer array
+  */
 void reverse_array(int array[], int size){
    
    int i = 0;
