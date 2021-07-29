@@ -1,11 +1,11 @@
 /**
  * Program to build a fucntion to reverse an character array
  *
- * Compilation: gcc -o reverse_string reverse_string.c
+ * Compilation: gcc -o reverse_string 08_reverse_string.c
  * Execution: ./reverse_string
  *
  * @Muskan, 190990681, 28/07/2021
- * Day 2 Assignment C Foundations, question 8
+ * Assignment C Foundations, Question 8
  */
 
 #include <stdio.h>
@@ -25,6 +25,12 @@ int main(){
 
    return 0;
 }
+
+/** Function to reverse the string by swapping array elements until it has reached the center of character array
+  * 
+  * Parameters: 
+  * char array s
+  */
 
 void reverse_string (char* s){
    
