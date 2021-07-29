@@ -35,11 +35,14 @@ void pyramid(int steps){
    int i, j; //for loops
    int top; //top position of the pyramid
 
-   top = (steps*2)/2;
+   // to make a pyramid there must be spaces after each hash
+   // hence double the number of steps 
+   top = (steps*2)/2; 
    j=0;
-
+   
    while(steps--){
    
+   // white spaces on left decreses with increase in steps
    for(i = 0; i < top; i++){
        printf(" ");
    }
