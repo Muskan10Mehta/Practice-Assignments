@@ -6,6 +6,7 @@
  *
  * @Muskan, 1910990681, 31/07/2021
  * Assignment 2 Sorting Algorithms
+ * Complexity chart link: https://docs.google.com/spreadsheets/d/1D3GYwIoHrjwgORPcbnJya0juyLg48IZiqXQqu1bJQm4/edit?usp=sharing
  */
 
 #include <stdio.h>
