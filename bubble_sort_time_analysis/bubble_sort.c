@@ -74,21 +74,21 @@ int main (){
   // d for reversly sorted array
   
   if (type == 'r' || type == 'R' || type == ' '){
-	  for (i = 0; i < size-1; i++)
+	  for (i = 0; i < size; i++)
 	    {
 	      array[i] = rand ();
 	    }
 	}
 
   if (type == 'a' || type == 'A'){
-	  for (i = 0; i < size-1; i++)
+	  for (i = 0; i < size; i++)
 	    {
 	      array[i] = i;
 	    }
 	}
 
   if (type == 'd' || type == 'D'){
-	  for (i = 0; i < size-1; i++)
+	  for (i = 0; i < size; i++)
 	    {
 	      array[i] = size-i;
 	    }
