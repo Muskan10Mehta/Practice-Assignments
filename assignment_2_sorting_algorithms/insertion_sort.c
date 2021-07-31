@@ -44,7 +44,9 @@ int main (){
   char type;			// to get type of array
   int i;
   
-  printf("Enter input size for array and array type seprated by space\nexample r for random, a for sorted, d for reverse sorted:");
+
+
+  printf("Enter input size for array and array type seprated by space\nexample r for random, a for sorted, d for reverse sorted: ");
   scanf("%ld", &size); //scans size of array
   scanf("%s", &type); // scans type of array
 
@@ -56,21 +58,17 @@ int main (){
   // d for reversly sorted array
   
   if (type == 'r' || type == 'R' || type == ' '){
-	  for (i = 0; i < size-1; i++)
+	  for (i = 0; i < size; i++)
 	    {
 	      array[i] = rand ();
 	    }
-	}
-
-  if (type == 'a' || type == 'A'){
-	  for (i = 0; i < size-1; i++)
+	} else if (type == 'a' || type == 'A'){
+	  for (i = 0; i < size; i++)
 	    {
 	      array[i] = i;
 	    }
-	}
-
-  if (type == 'd' || type == 'D'){
-	  for (i = 0; i < size-1; i++)
+	} else if (type == 'd' || type == 'D'){
+	  for (i = 0; i < size; i++)
 	    {
 	      array[i] = size-i;
 	    }
@@ -90,5 +88,6 @@ int main (){
   long long endtime = t.tv_sec * 1000 + t.tv_usec / 1000;
 
   printf ("for size = %ld, time taken in miliseconds is = %lld\n", size, endtime - starttime); //prints time lapsed
+
 }
 
