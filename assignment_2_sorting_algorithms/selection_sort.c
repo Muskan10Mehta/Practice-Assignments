@@ -15,8 +15,8 @@
 /** Function swap two array elements
   * Parameters: 
   * array: point to integer array
-  * j: index of element to be swapped with element at j + 1
-  * k: index j + 1
+  * j: index of element to be swapped with element at i
+  * k: index of minimum element
   */
 
 void swap (int *array, int j, int k)
