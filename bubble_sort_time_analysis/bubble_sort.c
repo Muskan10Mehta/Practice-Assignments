@@ -73,7 +73,7 @@ int main (){
   // a for ascending order sorted array
   // d for reversly sorted array
   
-  if (type == 'r' || type == 'R' || type == ' '{
+  if (type == 'r' || type == 'R' || type == ' '){
 	  for (i = 0; i < size-1; i++)
 	    {
 	      array[i] = rand ();
