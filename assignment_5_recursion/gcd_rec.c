@@ -5,7 +5,7 @@
  * Execution: ./gcd
  *
  * @Muskan, 1910990681, 4/8/2021
- * Assignment 5 Recursion Foundations Question 2 
+ * Assignment 5 Recursion Question 2 
  */
 
 #include <stdio.h>
