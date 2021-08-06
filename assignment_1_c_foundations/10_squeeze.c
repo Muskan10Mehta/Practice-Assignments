@@ -1,5 +1,5 @@
 /**
- * Program to create a function squeeze thet deletes each character in string 1 that matches any character in string 2
+ * Program to create a function squeeze that deletes each character in string 1 that matches any character in string 2
  *
  * Complilation: gcc -o squeeze 10_squeeze.c
  * Execution: ./squeeze
@@ -31,18 +31,21 @@ int main(){
 
 void squeeze(char s1[], char s2[]){
     
-   int i, j, k;
+   int i, j, k, w;
 
-   for(i = 0; s2[i]; i++){
-
-	for(k = j = 0; s1[i]; j++){
-           
-	   if( s2[i] == s1[j]){
-	           
-	       s1[k]= s1[k + 1];
-	       k++;
+   for(i = 0; s1[i]; i++){
+       
+	for( j = 0; s1[j]; j++){
+	   for(k = 0; s2[k]; k++){
+	      if(s1[j] == s2[k]){
+	         for(w = j; s1[w]; w++){
+		    s1[w] = s1[w + 1];
+		 } 
+	      }
+	   
 	   }
+	
 	}
-	s1[k] = '\0';
+   
    }
 }
