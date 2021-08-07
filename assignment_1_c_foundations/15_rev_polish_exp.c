@@ -1,148 +1,255 @@
 /**
- * Program to evaluate the reverse polish expression
- * 
- * Complilation: gcc -o rev_polish 15_rev_polish_exp.c
- * Execution: ./rev_polish
+ * Program to compute the reverse polish expression
  *
- * @Muskan, 1910990681, 29 July 2021
- * Assignment 1 C Foundations, Question 15
- * Resources: thecrazyprogrammer (to understand reverse polish notation and to revise stack) 
+ * Compilation: gcc -o rev_pol 15_rev_polish_exp.c
+ * Execution: ./rev_pol
+ *
+ * @Muskan, 1910990681, 1/8/2021
+ * Resources: thecrazyprogrammer (to read about reverse polish notation and to revise stacks)
  */
-
 
 #include <stdio.h>
 
-int isEmpty(int*);
-int isFull(int*, int*, int);
-int isOperand(char);
-int isOperator(char);
-void push(int*, int, int*, int);
-int pop(int*, int*);
-int evaluate(int, int, char);
 
-int main(){
-  
-   int size;
-   int i;
-   int top = -1;
-   int n, m, r;
+//global vriable to calculate top of stack
+//initially it is -1 to indicate empty stack
 
-   printf("Enter size of the input expression: ");
-   scanf("%d", &size);
+int top = -1;
 
-   int stack[size];
-   char array[size];
 
-   printf("Enter the reverse polish expression here: ");
-   for(i = 0; i < size; i++){
-      scanf("%c", array[i]);
-   }
+/** 
+ * Function to check if the stack is full or not
+ *
+ * Parameters: 
+ * size: size of stack
+ *
+ * returns: 1 if it is full, 0 if it isn't full
+ */
+
+int isFull(int size){
+
+   if(top + 1 >= size){
    
-   for(i = 0; array[i]; i++){
-       if(isOperand(array[i])){
-
-	   push(stack, stack[i], top);
-
-       }else if(isOperator(array[i])){
-           n = pop(stack, &top);
-	   m = pop(stack, &top);
-
-	   r = evaluate(n, m, array[i]);
-	   push(stack, r, &top);
-       }       
+	return 1;
+   
+   } else{
+   
+        return 0;
    }
-   printf("%d", stack[0]);
-   return 0;
-} 
 
-int isEmpty(int *top){
+}
+
+/**
+ * Function to check if the stack is empty or not
+ *
+ * returns: 1 if it is empty, 0 if it isn't empty
+ */
+
+int isEmpty(){
 
    if(top == -1){
-       return 1;
-   }else{
-       return 0;
+
+        return 1;
+
+   } else{
+
+        return 0;
    }
 
 }
 
-int isFull(int *stack; int *top, int size){
+/**
+ * Function to check if the character from string rev_polish is an operand i.e number or not
+ *
+ * Parameters:
+ * char n: the character to check for operand
+ *
+ * returns: 1 if it is an operand, 0 if it isn't an operand
+ */
 
-   if((top + 1) == size){
-       return 1;
-   }else{
-       return 0;
-   }
+int isOperand(char n){
+ 
+   // comapring with range for ascii value 0(ascii -> 48) and 9(ascii -> 57)
+   if( n >= 48 && n <= 57){
+     
+        return 1;
 
-}
-
-int isOperand(char i){
-
-   if( i >= 48 && i <= 57){
-       return 1;
-   }else{
-       return 0;
-   }
-
-}
-
-int isOperator(char l){
-
-   if( i == '+' || i == '-' || i == '/' || i == '%' || i == '^' || i == '*'){
-       return 1;
-   }else {
-       return 0;
-   }
-
-}
-
-void push(int *stack, char num, int *top, int size){
+   } else {
    
-   if(isFull(stack, &top, size)){
-
-        printf("stack is full");
-	return; 
-
-   }else{
-
-        *top++;
-	stack[*top] = num - 48;
+	return 0;
    
    }
 
 }
 
-int pop(int *stack, int *top){
-   
-   char num;
-   
-   if(isEmpty(stack, &top)){
+/**
+ * Function to check if the character from string rev_polish is an operator or not
+ *
+ * Parameters:
+ * char n: the character to check for operator
+ *
+ * returns: 1 if it is an operator, 0 if it isn't an operator
+ */
 
-        printf("Stack is empty");
-        return;
+int isOperator(char op){
 
-   }else{
+   if(op == '+' || op == '-' || op == '/' || op == '*' || op  == '%' || op == '^'){
 
-        num = stack[*top] ;
-        *top--;	
-        return num;
+        return 1;
+
+   } else {
+
+        return 0;
+
    }
-
 
 }
 
-int evaluate(int n, int m, char op){
+
+/**
+ * Function to push the operand onto the stack
+ *
+ * Parameters:
+ * int stack: the stack
+ * int size: size of stack
+ * int operand: value to push in stack
+ *
+ */
+
+void push(int *stack, int size, int operand){
+
+   if(!(isFull(size))){
+        
+	stack[++top] = operand;
    
-   if(op == '+'){
-       return (n + m); 
-   }else if(op == '-'){
-       return (n - m);
-   }else if(op == '/'){
-       return (n / m);
-   }else if(op == '%'){
-       return (n % m);
-   }else if(op == '^'){
-       return (n ^ m);
-   }else if(op == '*'){
-       return (n * m);
+   }   
+
+}
+
+
+/**
+ * Function to pop the operand from the stack
+ *
+ * Parameters:
+ * int stack: the stack
+ * 
+ * return: the popped element
+ */
+
+int pop(int *stack){
+
+   int num = 0;
+
+   if(!(isEmpty())){
+   
+	num = stack[top--];           
    }
+
+   return num;
+
+}
+
+
+/**
+ * Function to evaluate the expression when an operator is encountered in rev_polish string
+ *
+ * Parameters:
+ * int n1: the first number
+ * int n2: the second number
+ * char op: operator 
+ *
+ * returns: computed result after operating the operands with operator
+ */
+
+int evaluate(int n1, int n2, char op){
+
+   switch(op){
+      
+       case '+': return n1 + n2;
+		 break;
+       case '-': return n1 - n2;
+		 break;
+       case '/': return n1 / n2;
+		 break;
+       case '*': return n1 * n2;
+		 break;
+       case '%': return n1 % n2;
+		 break;
+       case '^': return n1 ^ n2;
+		 break;
+   }
+}
+
+/**
+ * Function to calculate the reverse polish expressiom
+ *
+ * Parameters:
+ * char rev_polish: the string containing reverse polish expressiom
+ * int size: size of string
+ *
+ * returns: the result of the reverse polish expression
+ */
+
+int calculate_rev_polish_exp(char *rev_polish, int size){
+
+   int stack[size];
+   int n1;
+   int n2;
+   int res;
+   
+   int i = 0;
+   int to_num = 0;
+
+
+   // this loop checks each character from the reverse polish expression string
+   // if the character is an operand it will push it onto the stack
+   // if it is a operator it will pop the top two elements evaluate the result after operating them with the operator 
+   // and push it back on the stack
+   // this will go on until the expression is complete 
+   // the final result will be saved on the first index of the stack and we will return that
+
+   while( rev_polish[i]){
+   
+       if( isOperand(rev_polish[i]) ){
+	   
+	   // converting the string number to int
+           to_num = rev_polish[i] - 48;
+
+           push(stack, size, to_num);
+	  
+       
+       } else if( isOperator(rev_polish[i]) ){     
+	       n1 = pop(stack);
+	       n2 = pop(stack);
+               res = evaluate(n1, n2, rev_polish[i]);
+
+	       // push result into stack
+               push(stack, size, res);
+	   }
+       
+
+       i++;
+       }
+   
+   return stack[top];
+
+}
+
+int main(){
+	
+   int size; 
+   int result = 0;
+   char rev_polish[100];
+
+   printf("Enter the size of Reverse Polish Expression: ");
+   scanf("%d", &size);
+   
+   printf("Enter the Reverse Polish Expression: ");
+   scanf("%s", rev_polish);
+   
+   result = calculate_rev_polish_exp(rev_polish, size);
+   
+   printf("Result = %d\n", result);
+
+   return 0;
 }
