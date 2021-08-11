@@ -1,0 +1,27 @@
+Stragegy to find the one light coin amoung 12 identical coins by using weighing balance 3 times max
+
+@Muskan, 1910990681, 11/08/2021
+Assignment 7 Sorting and Puzzles, Puzzles: Question 4
+
+Divide 12 coins in half, two groups each of 6 coins, say, A and B.
+
+First weigh: Weigh these two groups.
+             if A > B, that means group B has lightweight coin
+             if B > A, that means group A has lightweight coin
+
+Take whichever group has lower weight and divide it half in 2 groups of 3 coins each, say, C and D
+
+Second weigh: weigh these two groups 
+              if C > D, that means group D has lightweight coin
+              if D > C, that means group C has lightweight coin
+
+Whichever group has lowe weight now has three coins, lets number these coins as 1,2,3 respectively. 
+
+Third weigh: weigh any two coins (1. 2) or (2, 3) or (1, 3) 
+             if one coin is lighter than the other, then we have found counterfeit coin
+             if both coin weighs the same then the coin left will be counterfeit coin
+
+
+
+Conclusion: keep dividing the coins in half and weigh the two groups and divide the lightweight group in half and repeat.
+
