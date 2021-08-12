@@ -4,7 +4,7 @@ Stragegy to guess the colour of hat in 10 prisoners and hat problem with three h
 Assignment 7 Sorting and Puzzles, Puzzles: Question 2
 
 For 10 Prisoners in a line and 3 colour hats, black, white and red
-the distribution of hats can be in 27 ways but if we try to get a generalized version from this
+the distribution of hats can be in many ways but if we try to get a generalized version from this
 eg :
 B W R
 1 2 7
