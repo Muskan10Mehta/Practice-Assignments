@@ -1,0 +1,6 @@
+Stragegy to find a generic solution to the prisoner and hat problem with k hats and n prisoners
+
+@Muskan, 1910990681, 13/08/2021
+Assignment 7 Sorting and Puzzles, Puzzles: Question 3
+
+For n prisoners and k hats
