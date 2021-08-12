@@ -1,0 +1,70 @@
+Stragegy to guess the colour of hat in 10 prisoners and hat problem with three hats: Red, white and black
+
+@Muskan, 1910990681, 13/08/2021
+Assignment 7 Sorting and Puzzles, Puzzles: Question 2
+
+For 10 Prisoners in a line and 3 colour hats, black, white and red
+the distribution of hats can be in 27 ways but if we try to get a generalized version from this
+eg :
+B W R
+1 2 7
+1 3 6
+1 4 5
+1 5 4
+1 6 3 
+1 7 2
+0 8 2
+0 7 3
+and so on
+
+we see three patterns
+
+1. even-odd pair has third hat as odd in number
+2. even-even pair has third hat as even in number
+3. odd-odd pair has third hat as even in number
+
+
+Eg: the order of hats is as below
+
+R W W B B B R R W B
+
+Prisoners must decide to follow one type of distribution from the given 3 
+
+Let us assume they choose 3rd distribution
+
+the last prisoner counts hats of the 9 prisoners infront of them and gets this count
+
+3 black hats 
+3 white hats 
+3 red hats
+
+following the 3rd distribution the 10th prisoner make a guess that there are 3 black hats, 3 white hats and 4 red hats, says Red, but gets shot. 
+
+the 9th prisoner will count the hats infront of them and get
+
+3 black hats 
+2 white hats
+3 red hats
+
+and the 9th prisoner knows that the 10th prisoner said red and died so his hat must have been either black or white
+
+that means it is not a odd-odd-even distribution
+its either even-odd-odd
+or even-even-even distribution
+
+even-even-even distribution is not possible because then
+B W R will be have to be
+4 2 3 which doesnt add upto 10
+
+So it must be a even-odd-odd distribution 
+
+which makes 
+B W R
+4 3 3
+
+so 9th prisoner must be wearing white
+
+and so on 8th perioner will count hats infront of them and add the success of prisoners behind them and conclude that ditribution is of 2nd type.
+
+So, the last prisoner has a 1/3 probabilty of living or dying so worst case 9 prisoner will be saved, in best case all will be saved.
+
