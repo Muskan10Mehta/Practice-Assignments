@@ -1,0 +1,58 @@
+Stragegy to find the one light coin amoung 12 identical coins by using weighing balance 3 times max
+
+@Muskan, 1910990681, 12/08/2021
+Assignment 7 Sorting and Puzzles, Puzzles: Question 1
+
+For 10 Prisoners in a line and 2 colour hats, white and black
+the distribution of hats can be in 6 ways
+
+Pairs of odd distribution
+
+B W
+9 1
+7 3
+5 5
+3 7
+1 9
+
+Pairs of even distribution
+
+B  W
+10 0
+8  2
+4  6
+6  4
+2  8
+0  10
+
+Eg: the order of hats is as below
+
+B W B B W B W B B W B
+
+Prisoners Must decide to follow one typ of distribution, either even or odd
+
+Let us assume they choose even distribution
+
+the last prisoner counts hats of the 9 prisoners infront of them and gets this count
+
+6 black hats 
+3 white hats 
+
+following the even distribution he makes a guess that there are 6 black hats and 4 white hats and says white, but gets shot. 
+
+the 9th prisoner will count the hats infront of them and get
+
+6 black hats 
+2 white hats
+
+and the 9th prisoner knows that the 10th prisoner said white and died so his hat must have been black
+
+he adds black hats
+
+now, black hats are 7
+that means the distribution must be odd and comes to a conclusion that his hat is white 
+
+and so on 8th perioner will count hats infront of them and add the success of prisoners behind him and conclude that ditribution is odd. 
+
+So, the last prisoner has a 50/50 probabilty of living or dying so wrost case 9 prisoner will be saved, in best case all will be saved.
+
