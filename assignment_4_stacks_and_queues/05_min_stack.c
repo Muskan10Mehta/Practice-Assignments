@@ -1,7 +1,7 @@
 /** 
  * Program to find minimum element from stack
  *
- * Coded on Leetcode: https://leetcode.com/submissions/detail/539821668/
+ * Coded on Leetcode
  *
  * @Muskan, 1910990681, 09/08/2021
  * Assignment 4 Stacks and Queues, Question 
@@ -69,7 +69,7 @@ int minStackGetMin(MinStack* obj) {
 }
 
 void minStackFree(MinStack* obj) {
-    obj->top = -1;
+    free(obj->array);
 }
 
 /**
