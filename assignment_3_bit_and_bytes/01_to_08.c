@@ -79,30 +79,28 @@ int sign(int x){
 
 } 
 
-int getByte(int x, int n){
+int getByte(unsigned int x, int n){
    
    
    return 0;
 }
 
-int logicalShift(int x, int n){
-
-
-    
+int logicalShift(unsigned int x, int n){
+   
+   printf("%x\n", x >> n);    
    return 0;
 }
 
 int conditional(int x, int y, int z){
-
-  
-
-  return 0;
+   
+   
+   return 0;
 }
 
 int bang(int x){
-
-  
-  return 0;
+   // taking 2's compliment of the number and right shifting it by 31  
+   printf("%d\n", (((~x + 1)  >> 31)+ 1)) ;
+   return 0;
 }
 
 int invert(int x){
@@ -149,7 +147,7 @@ int main(){
    } else if (fn == 4){
 
            printf("Enter the number: ");
-           scanf("%d", &x);
+           scanf("%x", &x);
            
 	   printf("Enter the byte to extract: ");
            scanf("%d", &n);
@@ -159,7 +157,7 @@ int main(){
    }  else if (fn == 5){
 
            printf("Enter the number: ");
-           scanf("%d", &x);
+           scanf("%x", &x);
 
            printf("Enter n for shift: ");
            scanf("%d", &n);
