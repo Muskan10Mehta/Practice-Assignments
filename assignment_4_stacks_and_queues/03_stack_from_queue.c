@@ -57,7 +57,7 @@ int pop(MyStack* obj){
     int val = 0;
     val = obj->array[obj->head];
     
-    deletes
+    // deletes the popped element from array
     for(i = 0; i <= obj-> tail; i++){
             obj->array[i] = obj->array[i + 1];   
     }
