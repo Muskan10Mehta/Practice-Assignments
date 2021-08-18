@@ -81,7 +81,7 @@ int precedence_order(char op){
 void infix_to_postfix(char *infix){
 
    int i = 0;
-   
+   char temp;
    char in;
 
    for(i = 0; infix[i]; i++){
@@ -91,8 +91,11 @@ void infix_to_postfix(char *infix){
        } else if(infix[i] == '('){
            push(infix[i]);
        } else if(infix[i] == ')'){
+	   temp = pop();
+	   if(temp != '('){
            while(peek() != '(' && !(isEmpty())){
-               printf("%c\n", pop());
+               printf("%c\n", temp);
+	   }
            }
        } else {
            
@@ -105,7 +108,10 @@ void infix_to_postfix(char *infix){
    }
    
    while(!(isEmpty())){
-       printf("%c\n ", pop());
+       temp = pop();
+       if(temp != '('){
+       printf("%c\n ", temp);
+       }
    }
 }
 
