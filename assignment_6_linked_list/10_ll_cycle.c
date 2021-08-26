@@ -14,25 +14,31 @@
  *     struct ListNode *next;
  * };
  */
-struct ListNode *detectCycle(struct ListNode *head) {
+
+struct ListNode *detectCycle(struct ListNode *head)
+{
     
     struct ListNode *slow_pointer = head;
     struct ListNode *fast_pointer = head;
     
-    while(slow_pointer != NULL && fast_pointer != NULL){
+    while(fast_pointer != NULL && fast_pointer->next != NULL)
+    {
         
-        slow_pointer = slow_pointer->next;
-        fast_pointer = fast_pointer->next->next;
+        fast_pointer = fast_pointer->next->next; // move fast pointer by double the speed of slow pointer ie 2x
+        slow_pointer = slow_pointer->next; // move slow pointer by x speed
         
-        if(fast_pointer == slow_pointer){
-             break;
-        } 
-    }
-    
-    if(slow_pointer != fast_pointer){
-        return NULL;
-    }
-    
-    fast = head;
-    return slow_pointer;
+        if(fast_pointer == slow_pointer)
+        {
+            // reset the slow pointer if cycle is found and more both pointers by x speed
+            slow_pointer = head;
+            while (slow_pointer != fast_pointer)
+            {
+                slow_pointer = slow_pointer->next;
+                fast_pointer = fast_pointer->next;
+            }
+            
+            return slow_pointer;
+        }
+        }
+    return NULL;
 }
