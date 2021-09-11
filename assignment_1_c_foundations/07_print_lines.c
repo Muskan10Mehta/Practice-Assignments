@@ -11,52 +11,50 @@
 
 #include <stdio.h>
 
-int main(){
+int strnlen(char* line)
+{
+    int i = 0;
+    int length = 0;
+
+    while(line[i]){
+        length++;
+	i++;
+    }
+
+    return length;
+}
+
+int main()
+{
    
-   int i = 0;
-   char store_line[500];
-   int length = 0;
-   char c;
+   char temp_line[200];
+   FILE* fp;
 
-   // creates a pointer to the file 
-   // opens the file  
-   // r is for read-only
+   // open a file in read mode
 
-   FILE *f = fopen( "07_text.txt", "r" );
+   fp = fopen("07_text.txt", "r");
 
-   // checks if file is empty or not
-   if(f == NULL){
+   // check if file is empty or not
+
+   if(fp == NULL)
+   {
+       printf("File is empty.");
+       return 0;
+   }
    
-       printf("File not found");
+   // else get lines from files and check if they are greater than 80 characters
+   // fgets get a line from the file pointer provided
 
-   } else{
-         
-       // fgcanf reads from the given file
-       // it takes a pointer to file, 
-       // character input format, we can get the characters we want from the file
-       // array or buffer to store the scanned characters in
-       
-       // here we are scanning lines until \n is encountered and storing them in store_line array until we reach enf of file	   
-       while(fscanf(f, "%[^\n]%*c", store_line) != EOF){
-           
-	   length = 0;
-           for(i = 0; store_line[i]; i++){
-	       
-	       length++;
-	   
-	   }
-           
-	   if(length > 80){
-	   
-		printf("%s", store_line);
-	    
-	   }
-       
-       }
-
+   while(fgets(temp_line, 200, fp))
+   {
+	if(strnlen(temp_line) > 80)
+	{
+	    printf("%s", temp_line);
+	}
    }
 
-   fclose(f);
-   
+   // close file after we have reached the EOF
+   fclose(fp);
+
    return 0;
 }	
