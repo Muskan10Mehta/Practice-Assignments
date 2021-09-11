@@ -81,11 +81,20 @@ int sign(int x){
 
 int getByte(unsigned int x, int n){
    
-   
+   // if number the bytes there are 4 from 0 to 3
+   // so we move the the place n right by 3 places 
+   // and then left shift x by the updated n places 
+   // the required bit will be placed at the end 
+   // and we will get by & it with 1111 that is 15 or 0xff
+
+   printf("%x\n", (x >> (n << 3) & 0xff));
+
    return 0;
 }
 
 int logicalShift(unsigned int x, int n){
+   
+   // left shift by n places
    
    printf("%x\n", x >> n);    
    return 0;
@@ -93,7 +102,11 @@ int logicalShift(unsigned int x, int n){
 
 int conditional(int x, int y, int z){
    
-   
+   // get if x is true or false
+   x = !x;
+
+   printf("%d\n", (~x & y) | (x & z) );
+
    return 0;
 }
 
@@ -103,14 +116,16 @@ int bang(int x){
    return 0;
 }
 
-int invert(int x){
+int invert(int x, int p, int n){
+   
+   printf("%d\n", x ^ (~(~0 << n) << p));
 
    return 0;
 }
 
 int main(){
 
-   int x, y, z, n;
+   int x, y, z, n, p;
    int fn;
 
    printf("Enter the number for the fucntion you want to use:\n1 bitAnd\n2 bitXor\n3 sign\n4 getByte\n5 logicalShift\n6 conditional\n7 bang\n8 invert\n ");
@@ -189,8 +204,12 @@ int main(){
 
            printf("Enter the number: ");
            scanf("%d", &x);
+           printf("Enter the position: ");
+           scanf("%d", &p);
+	   printf("Enter the number of byte to be shifted: ");
+           scanf("%d", &n);
 
-           invert(x);
+           invert(x, p, n);
 
    }
 
