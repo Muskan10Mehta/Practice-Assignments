@@ -17,25 +17,37 @@
 
 
 struct ListNode* deleteDuplicates(struct ListNode* head){
-
-
-    struct ListNode *prev = head;
-    struct ListNode *curr = prev;
-
-    while(prev){
-
-        if(prev->next != NULL && prev->val == prev->next->val){
-            while(prev->next != NULL && prev->val == prev->next->val){
-                prev = prev->next;
+     
+  if (head == NULL || head->next == NULL) {
+        return head;
+    }
+    
+    int duplicate_value;
+    
+    struct ListNode *temp = (struct ListNode *) malloc(sizeof(struct ListNode));
+    temp->val = head->val;
+    temp->next = head;
+    
+    struct ListNode *curr = temp;
+    
+    while (curr->next != NULL && curr->next->next != NULL) {
+        
+        // check duplicate 
+        if (curr->next->val == curr->next->next->val) {
+            
+            duplicate_value = curr->next->val;
+            // remove duplicates 
+            while (curr->next != NULL && curr->next->val == duplicate_value) {
+                struct ListNode *duplicate = curr->next;
+                curr->next = curr->next->next;
+                free(duplicate);
             }
-            curr = prev->next;
-        } else{
+        } else {
             curr = curr->next;
         }
-
-        prev = prev->next;
     }
-    return head;
+    return temp->next;
 }
+
 
 
