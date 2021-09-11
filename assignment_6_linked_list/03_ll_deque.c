@@ -9,107 +9,176 @@
  */
 
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <assert.h>
 
-struct Node{
+typedef struct Node{
    int value;
    struct Node* prev;
    struct Node* next;
+} node;
+
+// create a new node
+node* createNode (int value){
+    
+    node *temp = (node*) malloc (sizeof(node));
+    if(temp == NULL){
+	return NULL;
+    }
+
+    temp -> value = value;
+    temp -> prev = NULL;
+    temp -> next = NULL;
+    return temp;
 }
 
-struct Deque{
-   struct Node *head;
-   struct Node *tail;
-}
-
-typedef struct Node Node;
-typedef struct Deque Deque;
-
-Deque *createDeque(){
-   Deque *deque == (Deque*)malloc(sizeof(Deque));
-   deque->head = NULL;
-   deque->tail = NULL;
-}
-
-Node *createNode(){
-   Node *node = (Node*)malloc(sizeof(Node));
-   node->prev = NULL;
-   node->next = NULL;   
-}
-
-int is_empty(dq){
+// check if the deque is empty or not
+int isEmpty(node *head, node *tail){
    
-   if(dq->head == NULL|| dq->tail == NULL){
+   if(head == NULL && tail == NULL){
        return 1;
    }
 
    return 0;
 }
 
-void pushHead(Deque *dq, int value){
+// adds value at head
+void addHead(node **head, node **tail, int value){
 
-   Node *temp = createNode();
-   temp = value;
+   node *temp = createNode(value);
 
-   if(is_Empty(dq)){
-       
-       dq->head = temp;
-       dq->head->prev = NULL;
-       dq->head->next = NULL;
-
-   }else{
-
-       head->prev = temp;
-       temp->next = head;
-       head = temp; 
-       head->prev = NULL;
+   if(temp == NULL){
+       return;
    }
-}
 
-void pushTail(Deque *dq, int value){
+   if(isEmpty(*head, *tail)){
+       (*head)= (*tail) = temp;
+       return;
+   }
+
+   temp->next = (*head);
+   (*head) -> prev = temp;
+   (*head) = temp;
    
-   Node *temp = createNode();
-   temp = value;
+}
 
-   if(is_empty(dq)){
+// adds value at tail
+void addTail(node **head, node **tail, int value){
+   
+   node *temp = createNode(value);
 
-       dq->head = temp;
-       dq->tail = temp;
-
-   }else{
-    
-       temp->prev = dq->tail;
-       dq->tail->next = temp;
-       dq->tail = temp;    
-
+   if(temp == NULL){
+       return;
    }
+
+   if(isEmpty(*head, *tail)){
+       *head = temp;
+       *tail = temp;
+       return;
+   }
+
+   //if not empty, make temp last node
+   
+   temp -> prev = (*tail);
+   (*tail) -> next = temp;
+   (*tail) = temp;
 
 }
 
+// removes node from head, returns value at head
+int removeHead(node **head, node **tail){
+
+   if(isEmpty(*head, *tail)){
+       return INT_MIN;
+   }
+
+   node *temp = *head;
+   int value; 
+
+   if((*head) -> next == NULL){
+
+       value = temp -> value;
+       (*head) = (*tail) = NULL;
+       free(temp);
+       return value; 
+   }
+
+   temp = *head;
+
+   value = temp -> value;
+   *head = temp -> next;
+   temp -> next -> prev = NULL;
+   free(temp);
+   
+   return value;
+}
+
+// remove node from tail, returns value at tail
+int removeTail(node **head, node **tail){
+
+   if(isEmpty(*head, *tail)){
+       return INT_MIN;
+   }
+
+   int value;
+
+   if((*head) -> next == NULL){
+       node *temp = *head;
+       value = temp -> value;
+       *head = *tail = NULL;
+       free(temp);
+       return value;
+   }
+
+   node *temp = *head;
+
+   value = temp -> value;
+   *tail = (*tail) -> prev;
+   (*tail) -> next = NULL;
+   free(temp);
+
+   return value;
+
+}
+
+// returns value at head
+int peekHead(node *head, node *tail){
+   if(isEmpty(head,tail)){
+       return INT_MIN;
+   }
+
+   return head -> value;
+} 
+
+// returns value at tail
+int peekTail(node *head, node *tail){
+   if(isEmpty(head,tail)){
+       return INT_MIN;
+   }
+
+   return tail -> value;
+}
+
+// check test cases
 int main(){
    
-   Deque *dq = createDeque();
-   
-   printf("Pushed 10 at head");
-   pushHead(dq, 10);
+   node *head = NULL;
+   node *tail = NULL;
 
-   printf("Pushed 4 at tail");
-   pushTail(dq, 4);
-
-   printf("Pushed 5 at tail");
-   pushTail(dq, 5);
-
-   printf("Pushed 7 at head");
-   pushHead(dq, 7);
-
-   printf("Peek head : %d\n", peekHead(dq));
-   printf("Peek tail : %d\n", peekTail(dq));
-
-   printf("Popped %d from head\n", popHead(dq);
-   printf("Peek head : %d\n", peekHead(dq));
-
-   printf("Popped %d from tail\n", popTail(dq);
-   printf("Peek tail: %d\n", popTail(dq);
+   assert(isEmpty(head,tail) == 1);
+   addHead(&head, &tail, 10);
+   assert(isEmpty(head,tail) == 0);
+   addTail(&head, &tail, 7);
+   addTail(&head, &tail, 19);
+   assert(peekTail(head, tail) == 19);
+   assert(removeTail(&head, &tail) == 19);
+   addHead(&head, &tail, 12);
+   assert(peekHead(head, tail) == 12);
+   assert(removeHead(&head, &tail) == 12);
+   assert(removeTail(&head, &tail) == 7);
+   assert(removeHead(&head, &tail) == 10);
+   assert(isEmpty(head, tail) == 1);
 
    return 0;
 }
