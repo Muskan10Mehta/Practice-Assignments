@@ -112,7 +112,7 @@ int conditional(int x, int y, int z){
 
 int bang(int x){
    // taking 2's compliment of the number and right shifting it by 31  
-   printf("%d\n", (((~x + 1)  >> 31)+ 1)) ;
+   printf("%d\n", ((((~x + 1) | x) >> 31)+ 1)) ;
    return 0;
 }
 
